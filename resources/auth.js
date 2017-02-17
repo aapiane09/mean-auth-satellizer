@@ -12,16 +12,20 @@ module.exports = {
 
     var token = req.headers.authorization.split(' ')[1];
     var payload = null;
-
+    //Tests decoding of the token from payload
     try {
       payload = jwt.decode(token, process.env.TOKEN_SECRET);
     }
+    // If there is an error, this runs
     catch (err) {
       return res.status(401).send({ message: err.message });
     }
+    //moment returns milliseconds, unix returns UTC
     if (payload.exp <= moment().unix()) {
+      //If token has expired against UTC
       return res.status(401).send({ message: 'Token has expired.' });
     }
+    //assigns User ID (ObjectId in MongoDB) to req.user
     req.user = payload.sub;
     next();
   },

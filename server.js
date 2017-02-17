@@ -17,6 +17,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
 
 // set view engine to hbs (handlebars)
+// Use Handlebars (HBS) instead of HTML
 app.set('view engine', 'hbs');
 
 // connect to mongodb
@@ -111,7 +112,7 @@ app.get(['/', '/signup', '/login', '/logout', '/profile'], function (req, res) {
 
 
 /*
- * Listen on localhost:3000
+ * Listen on localhost:9000
  */
 app.listen(9000, function() {
   console.log('server started');

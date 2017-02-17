@@ -32,7 +32,7 @@ userSchema.pre('save', function (next) {
     });
   });
 });
-
+//Adds a method using bcrypt to compare passwords
 userSchema.methods.comparePassword = function (password, done) {
   bcrypt.compare(password, this.password, function (err, isMatch) {
     done(err, isMatch);
